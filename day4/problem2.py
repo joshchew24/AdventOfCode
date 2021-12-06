@@ -27,3 +27,26 @@ class BingoBoard:
                 if not self.seen.count(n):
                     sum += int(n,10)
         return sum
+
+boards = []
+draw = ""
+with open("input.txt", "r") as input:
+    draw = input.readline().split(",")
+    line = input.readline()
+
+    while(line):
+        board = BingoBoard()
+        for i in range(5):
+            row = input.readline().split()
+            board.rowContainer.append(row)
+        boards.append(board)
+        
+        line = input.readline()
+
+for num in draw:
+    for board in boards:
+        board.contains(num)
+        if board.isWinner():
+            print(board.sumUnmarked() * int(num, 10))
+            exit()
+            
