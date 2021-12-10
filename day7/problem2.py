@@ -1,5 +1,4 @@
 import sys
-import functools
 def find_mode(counts):
     mode = 0                                # mode
     mode_n = 0                              # number of occurrences
@@ -41,14 +40,17 @@ def brute_force(counts):
 def getSumDiff(counts, n):
     sum = 0
     for i in counts:
-        sum += abs(int(i,10) - n)*counts[i]
+        sum += nthTriangle(abs(int(i, 10)- n))*counts[i]
     return sum
+
+def nthTriangle(n):
+    return ((n*n) + n)/2
 
 def binary_search(counts, lo, hi):
     if (hi - lo) != 0:
-        mid = (hi + lo)/2
-        lef_mid = getSumDiff(counts, (lo + mid)/2)
-        rig_mid = getSumDiff(counts, (mid + hi)/2)
+        mid = int((hi + lo)/2)
+        lef_mid = getSumDiff(counts, int(lo + mid)/2)
+        rig_mid = getSumDiff(counts, int(mid + 1 + hi)/2)
         if lef_mid < rig_mid:
             lef = lo
             rig = mid
@@ -68,5 +70,4 @@ for c in crabs:
 
 print(brute_force(counts))
 min, max = find_max_min(counts)
-print(binary_search(counts, min, max))
-
+# print(binary_search(counts, min, max))            # doesn't give exact answer
