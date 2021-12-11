@@ -1,4 +1,4 @@
-import sev_seg_disp as ssd
+import naive_sev_seg_disp as ssd
 
 # count the number of digits that use a unique number of segments (1, 4, 7, 8)
 # seg count for: 0  1  2  3  4  5  6  7  8  9
