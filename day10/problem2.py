@@ -68,5 +68,3 @@ for line in lines:
 
 scores.sort()
 print(scores[len(scores)//2])
-
-# print(sum)
