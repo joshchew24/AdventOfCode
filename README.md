@@ -1,7 +1,7 @@
 # AdventOfCode2021
-Personal Solution Repository for 2021 Advent of Code problems. https://adventofcode.com/
+Personal Solution Repository for 2021 Advent of Code problems. View all the associated problem statements here: https://adventofcode.com/
 
-Solutions written using Python 3, some use numpy 1.12.4.
+Solutions written using Python 3, some also use numpy 1.12.4.
 
 ## Day 11:
 This is the first reflection I'm writing. Not really sure what I want these to be but for now I will just be jotting down some thoughts I had about the problem. I may retroactively do the same for the days I missed.  
