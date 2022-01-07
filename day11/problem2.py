@@ -1,70 +1,100 @@
-from collections import deque
+import numpy as np
+from queue import Queue
 
-lefts = ("(", "[", "{", "<")
-rights = (")", "]", "}", ">")
-corruption_values = {
-    ")" : 3,
-    "]": 57,
-    "}": 1197,
-    ">": 25137
-}
-completion_values = {
-    ")" : 1,
-    "]": 2,
-    "}": 3,
-    ">": 4
-}
+class dumbos:
+    def __init__(self, input):
+        # read first line
+        self.points = np.array([int(c) for c in input.readline().strip()])
+        # read rest of lines
+        for line in input:
+            lineAsArray = np.array([int(c) for c in line.strip()])
+            self.points = np.vstack((self.points, lineAsArray))
+        self.queue = Queue(maxsize = 0)
+        self.numFlashes = 0
 
-class chunk:
-
-    def __init__(self, chunk):
-        self.chunk = chunk
-        self.stack = deque()
-        self.completionString = ""
-
-    # return corruption value of chunk
-    def getCorruptionValue(self):
-        for c in self.chunk:
-            if c in lefts:
-                self.stack.append(c)
-            elif c in rights:
-                curr = self.stack.pop()
-                if rights.index(c) != lefts.index(curr):
-                    return corruption_values[c]
-        return 0
+    def step(self):
+        self.addOne() 
+        self.enqueueToFlash()  
+        self.enqueueProcessLoop()
+       
+    def doSteps(self, numSteps):
+        while numSteps:
+            print(self)
+            print("number of steps left:", numSteps)
+            self.step()
+            numSteps -= 1
+        print(self)
     
-    # get completion string of chunk
-    def getCompletionString(self):
-        completionString = ""
-        while self.stack:
-            rem = self.stack.pop()
-            completionString += rights[lefts.index(rem)]
+    def findSynchronousFlash(self):
+        numSteps = 0
+        flashArr = np.zeros((10,10), dtype=int)
+        while True:
+            print(self)
 
-        self.completionString = completionString
-        return completionString
+            numSteps += 1
+            print("Step:", numSteps)
+            self.step()
+            
+            if np.all(self.points == flashArr):
+                break
+        print(self)
+        print("Number of steps before first synchronous flash: ", numSteps)
 
-    def getCompletionScore(self):
-        result = 0
-        for c in self.completionString:
-            result *= 5
-            result += completion_values[c]
-        return result
+    def addOne(self):
+        self.points = np.vectorize(lambda x : x + 1)(self.points)    
+    
+    def enqueueToFlash(self):
+        toFlash = np.where(self.points > 9)
+        xs = toFlash[1]
+        ys = toFlash[0]
+        for x, y in zip(xs, ys):                # can't directly loop through toFlash tuple. this extracts each array and zips them for the loop
+            self.queue.put((y,x))
+
+    def processQueue(self):
+        while not self.queue.empty():
+            curr = self.queue.get()
+            if self.points[curr] == 0: continue
+            if self.points[curr] > 9:
+                self.flash(curr)
+            else:
+                self.points[curr] += 1
+
+    def flash(self, curr):
+        self.points[curr] = 0
+        self.numFlashes += 1
+        self.enqueueNeighbours(curr)
+
+    def enqueueNeighbours(self, curr):
+        col, row = curr
+        for x in range(col - 1, col + 2):
+            if x < 0 or x >= self.points.shape[1]: continue
+            for y in range(row - 1, row + 2):
+                if y < 0 or y >= self.points.shape[0]: continue
+                if x == col and y == row: continue
+                self.queue.put((x, y))
+            
+    
+    def enqueueProcessLoop(self):
+        while not self.queue.empty():
+            self.processQueue()
+            self.enqueueToFlash()
+
+    def printQ(self):
+        print(list(self.queue.queue))
+
+    def __str__(self):
+        return str(self.points)
 
 
-with open("input.txt", "r") as input:
-    lines = input.readlines()
 
-sum = 0
-incompletes = lines.copy()
-scores = []
-for line in lines:
-    currChunk = chunk(line)
 
-    if currChunk.getCorruptionValue() > 0:
-        incompletes.remove(line)
-    else:
-        print(line.strip() + currChunk.getCompletionString())
-        scores.append(currChunk.getCompletionScore())
 
-scores.sort()
-print(scores[len(scores)//2])
+
+def main():
+    with open("input.txt", "r") as input:
+        board = dumbos(input)
+        board.findSynchronousFlash()
+
+
+if __name__ == "__main__":
+    main()

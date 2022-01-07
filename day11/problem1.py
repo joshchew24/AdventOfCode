@@ -76,9 +76,9 @@ class dumbos:
 
 
 def main():
-    with open("input.txt", "r") as input:
+    with open("test.txt", "r") as input:
         board = dumbos(input)
-        board.doSteps(100)
+        board.doSteps(195)
         print(board.numFlashes)
 
 
