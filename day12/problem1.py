@@ -1,5 +1,19 @@
+from queue import Queue
+
 def countPaths(adjList):
     return
+
+def bfs(adjList):
+    visited = []
+    worklist = Queue(maxsize = 0)
+    for adj in adjList["start"]:
+        worklist.put(adj)
+    while not worklist.empty():
+        curr = worklist.get()
+        visited.append(curr)
+    
+
+
 def main():
     adjList = {}
     with open("small.txt", "r") as input:
@@ -10,7 +24,7 @@ def main():
             if second not in adjList: adjList[second] = [first]
             elif first not in adjList[second]: adjList[second].append(first)
         print(adjList)
-    countPaths(adjList)
+    bfs(adjList)
 
 
 
