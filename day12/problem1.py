@@ -1,15 +1,20 @@
 from queue import Queue
-
-def countPaths(adjList):
-    return
+from collections import deque
 
 class Graph:
 
     def __init__(self, adjList):
         self.visited = []
         self.worklist = Queue(maxsize = 0)
-        for adj in adjList["start"]:
-            self.worklist.put(adj)
+        self.adjList = adjList
+        # for adj in adjList["start"]:
+        #     self.worklist.put(adj)
+
+    def solve(self, curr):
+        adjs = self.adjList[curr]
+        stack = deque()
+        visited = []
+
 
 def bfs(adjList):
     visited = []
@@ -37,9 +42,6 @@ def bfs(adjList):
 
     print(numPaths)
 
-# def func():
-    
-def dfs(adjList):
 
 
 
