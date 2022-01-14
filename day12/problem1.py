@@ -4,16 +4,21 @@ from collections import deque
 class Graph:
 
     def __init__(self, adjList):
+        self.adjList = adjList
         self.visited = []
         self.worklist = Queue(maxsize = 0)
-        self.adjList = adjList
+        self.numPaths = 0
         # for adj in adjList["start"]:
         #     self.worklist.put(adj)
 
-    def solve(self, curr):
+    def countPaths(self, curr, visited):
         adjs = self.adjList[curr]
         stack = deque()
-        visited = []
+        if curr == "end":
+            self.numPaths += 1
+            return
+        if curr in visited: 
+            return
 
 
 def bfs(adjList):
