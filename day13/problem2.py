@@ -1,6 +1,5 @@
 from collections import defaultdict
 from copy import copy
-import numpy as np
 import matplotlib.pyplot as plt
 
 
