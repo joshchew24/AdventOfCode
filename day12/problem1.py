@@ -14,18 +14,18 @@ class Graph:
         adjs = self.adjList[curr]
         if curr == "end":
             self.numPaths += 1
+            print(visited, curr)
             return
-        if curr in visited: 
+        if curr.islower() and curr in visited: 
             return
         for adj in adjs:
             nextVisited = deepcopy(visited)
-            if curr.islower(): 
-                nextVisited.append(curr)
+            nextVisited.append(curr)
             self.countPath(adj, nextVisited)
 
 def main():
     adjList = {}
-    with open("input.txt", "r") as input:
+    with open("small.txt", "r") as input:
         for line in input:
             first, second = line.strip().split("-") 
             if first not in adjList: adjList[first] = [second]
