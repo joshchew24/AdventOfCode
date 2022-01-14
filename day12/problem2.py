@@ -7,28 +7,31 @@ class Graph:
         self.numPaths = 0
 
     def countPaths(self):
-        self.countPath("start", [])
+        self.countPath("start", [], True)
         print(self.numPaths)
 
-    def countPath(self, curr, visited):
+    def countPath(self, curr, visited, canDupe):
+        nextCanDupe = canDupe
         adjs = self.adjList[curr]
-        # breakpoint()
         if curr == "end":
             self.numPaths += 1
             print(visited, curr)
             return
-        if curr.islower() and visited.count(curr) == 2: 
-            return
+        if curr.islower() and curr in visited:
+            if canDupe:
+                nextCanDupe = False
+            else:
+                return
         if curr == "start" and curr in visited:
             return
         for adj in adjs:
             nextVisited = deepcopy(visited)
             nextVisited.append(curr)
-            self.countPath(adj, nextVisited)
+            self.countPath(adj, nextVisited, nextCanDupe)
 
 def main():
     adjList = {}
-    with open("small.txt", "r") as input:
+    with open("input.txt", "r") as input:
         for line in input:
             first, second = line.strip().split("-") 
             if first not in adjList: adjList[first] = [second]
