@@ -6,8 +6,6 @@ class Graph:
 
     def __init__(self, adjList):
         self.adjList = adjList
-        self.visited = []
-        self.worklist = Queue(maxsize = 0)
         self.numPaths = 0
 
     def countPaths(self):
@@ -16,7 +14,6 @@ class Graph:
 
     def countPath(self, curr, visited):
         adjs = self.adjList[curr]
-        # breakpoint()
         if curr == "end":
             self.numPaths += 1
             return
@@ -39,8 +36,6 @@ def main():
             elif first not in adjList[second]: adjList[second].append(first)
     graph = Graph(adjList)
     graph.countPaths()
-
-
 
 if __name__ == "__main__":
     main()
