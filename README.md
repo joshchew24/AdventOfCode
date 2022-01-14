@@ -10,3 +10,6 @@ This day felt like a more challenging combination of day 6 and day 9. I always r
 ## Day 12:
 ### Initial thoughts
 Looks like a graph problem... not really looking forward to solving it. I feel like I struggled with this content in CPSC 221, so at this point I am even rustier on this subject. However, I think solving this will improve my confidence and it is also very important in general to be familiar with. 
+
+### Reflection
+That was annoying. Spent a few days recalling graph implementations (adjacency lists/matrices) and traversals (DFS/BFS). Tried implementing with no success. I had this goal in my head to avoid using recursion, because I really wanted to try to use a stack/queue for some reason... Was stuck for too long and decided to restart with a fresh implementation and found the recursive method to be incredibly simple to write. For part 2, I hacked together a boolean flag to track whether a single small cave has been double visited. Not a pretty solution but works and could definitely be cleaned up.
