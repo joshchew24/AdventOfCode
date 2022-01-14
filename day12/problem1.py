@@ -28,35 +28,6 @@ class Graph:
                 nextVisited.append(curr)
             self.countPath(adj, nextVisited)
 
-def bfs(adjList):
-    visited = []
-    worklist = Queue(maxsize = 0)
-    numPaths = 0
-    for adj in adjList["start"]:
-        worklist.put(adj)
-    visited.append("start")
-    # breakpoint()
-    while not worklist.empty():
-        curr = worklist.get()
-        # if curr == "A": breakpoint()
-        if curr == "end": 
-            numPaths += 1
-            visited = []
-            continue
-        if curr.islower(): 
-            if curr not in visited:
-                visited.append(curr)
-            else:
-                continue
-        for adj in adjList[curr]:
-            if adj not in visited:
-                worklist.put(adj)
-
-    print(numPaths)
-
-
-
-
 def main():
     adjList = {}
     with open("input.txt", "r") as input:
