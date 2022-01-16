@@ -24,3 +24,6 @@ Took longer than I expected but I flip-flopped between a couple ideas and took a
 ## Day 14:
 ### Initial thoughts
 Seems pretty straight forward. Dictionary to store the pair insertion rules, sliding window loop. Problem 2 will probably test for optimisation so will have to think of something clever.
+
+### Reflection
+Initial thoughts were pretty accurate to how the problem went. P1 was straightforward, P2 relied on optimised implementation which I did not have. Reapproached by throwing dictionaries at the problem (as one does) and it ended up working. Short thoughts because it's late and I'm tired
