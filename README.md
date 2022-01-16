@@ -20,3 +20,7 @@ Thinking of different ways to implement. Could use numpy arrays but seems like a
 
 ### Reflection (bit of an incoherent rambling of thoughts)
 Took longer than I expected but I flip-flopped between a couple ideas and took a dinner break in the middle. Initially pursued class-based implementation but realized I could probably do the whole thing as a dictionary of tuples (hashmap for quicker indexing, don't actually need the values). Tried using a defaultdict but I don't think it was necessary since the values were entirely ignored, though I think it simplifies creation of new keys. Tried splitting various procedures into their own functions but I think it complicated things a little. (using axis 0 or 1 for indexing the tuple caused a headache as I realized this approach wouldn't work since tuples are immutable. Had to implement explicit workaround rather than using the anonynmity of the axis index) Drawing the final picture was an interesting challenge and I thought I might use a binary drawing in the command line but that seemed annoying to implement and ineffective at displaying the information. I went with the easiest method of searching stack overflow for how to display coordinates and found a matplotlib solution that worked fantastic. I'm glad I had a bit of experience using mpl from Kardium. Overall enjoyed this problem :)
+
+## Day 14:
+### Initial thoughts
+Seems pretty straight forward. Dictionary to store the pair insertion rules, sliding window loop. Problem 2 will probably test for optimisation so will have to think of something clever.
