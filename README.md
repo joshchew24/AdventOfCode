@@ -27,3 +27,7 @@ Seems pretty straight forward. Dictionary to store the pair insertion rules, sli
 
 ### Reflection
 Initial thoughts were pretty accurate to how the problem went. P1 was straightforward, P2 relied on optimised implementation which I did not have. Reapproached by throwing dictionaries at the problem (as one does) and it ended up working. Short thoughts because it's late and I'm tired
+
+## Day 15:
+### Initial thoughts
+Graph problem, some sort of search/traversal algorithm for weighted graphs. Will have to brush up on CPSC 221 stuff again. Looking forward to it, wish I had this sort of context when I took the course. 
