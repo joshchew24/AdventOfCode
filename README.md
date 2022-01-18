@@ -31,3 +31,11 @@ Initial thoughts were pretty accurate to how the problem went. P1 was straightfo
 ## Day 15:
 ### Initial thoughts
 Graph problem, some sort of search/traversal algorithm for weighted graphs. Will have to brush up on CPSC 221 stuff again. Looking forward to it, wish I had this sort of context when I took the course. 
+#### Day 2
+Extending the grid seems like a bit of a hassle but I think I will manage. Hopefully my algo can handle the 500x500 grid that it will end up becoming.
+### Reflection
+#### Day 1
+... that was kind of frustrating... Dijkstra's has a lot of components to keep track of. Ended up implementing a simple class wrapper for the heapq algo to simplify it's usage as a priority queue. When I finally got it to a apparently working state, the answer I got (619) was incorrect. After trying to debug using some sample inputs I ended up looking at other reddit solutions to see if I had missed something. I tried applying another person's algo to my grid and got 621. Why was my algo giving an answer that was off by 2? The number saved in the array of shortest path distances was 619, but I decided to iterate through the shortest path from start to end and sum the grid scores to compare, which gave me 621 (the correct answer). I should probably investigate to figure out why the stored distances don't match the actual grid score, but maybe for another day. 
+##### Edit
+I just reread the problem.... I implemented scores based on the node you leave rather than the node you enter (i.e. risk is supposed to be calculated based on incoming edge weights rather than outgoing.) appears that my algo still finds shortest path but you need to manually calculate total score after. might go back and fix this
+#### Day 2
