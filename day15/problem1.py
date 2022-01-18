@@ -77,12 +77,15 @@ class Graph:
 
         path_tracker = (self.grid.shape[0] - 1, self.grid.shape[1] - 1)
         path = []
+        sum = 0
         while path_tracker != (0,0):
+            sum += self.grid[path_tracker]
             path.append(path_tracker)
             path_tracker = self.predecessors[path_tracker]
         path.append((0,0))
         path.reverse()
         print("Path:", path)
+        print(sum)
 
 
 
@@ -96,7 +99,7 @@ class Graph:
 
 
 def main():
-    with open("input.txt", "r") as input:
+    with open("big.txt", "r") as input:
         graph = Graph(input)
     print(graph)
     graph.dijkstra()
