@@ -99,7 +99,7 @@ class Graph:
 
 
 def main():
-    with open("big.txt", "r") as input:
+    with open("input.txt", "r") as input:
         graph = Graph(input)
     print(graph)
     graph.dijkstra()
