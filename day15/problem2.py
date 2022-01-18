@@ -24,9 +24,14 @@ class PriorityQueue:
 class Graph:
     
     def __init__(self, input):
-        grid = np.array(list(input.readline().strip()))
+        # breakpoint()
+        grid = np.array(list(input[0]))
+        flag = True
         for line in input:
-            lineAsarray = np.array(list(line.strip()))
+            if flag: 
+                flag = False
+                continue
+            lineAsarray = np.array(list(line))
             grid = np.vstack((grid, lineAsarray))
         grid = grid.astype(int)        
         
@@ -99,27 +104,46 @@ class Graph:
         return [north, east, south, west]
 
 def biggify(input):
+    # breakpoint()
+    big_grid = []
+    row = []
     for line in input:
         line = line.strip()
         chars = [int(char) for char in line]
         new_line = copy(line)
         new_chars = copy(chars)
-        for i in range(5):
+        for i in range(4):
             chars = new_chars
             new_chars = []
             for char in chars:
                 new_line += str(add(char))
                 new_chars.append(add(char))
-        print(new_line)
+        big_grid.append(new_line)
+        row.append(new_line)
+    
+   
+    for i in range(4):
+        temp = []
+        for line in row:
+            new_line = ""
+            new_line = new_line.join([str(add(int(char))) for char in line])
+            big_grid.append(new_line)
+            temp.append(new_line)
+        row = temp
+
+    return big_grid
+    
+    
+
 
 def add(num):
-    return num + 1 if num < 9 else 0
+    return num + 1 if num < 9 else 1
 
 def main():
-    with open("small.txt", "r") as input:
-        biggify(input)
-        # graph = Graph(input)
-    # graph.dijkstra()
+    with open("input.txt", "r") as input:
+        input = biggify(input)
+        graph = Graph(input)
+    graph.dijkstra()
 
 if __name__ == "__main__":
     main()
