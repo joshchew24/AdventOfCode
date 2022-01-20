@@ -40,3 +40,9 @@ Extending the grid seems like a bit of a hassle but I think I will manage. Hopef
 I just reread the problem.... I implemented scores based on the node you leave rather than the node you enter (i.e. risk is supposed to be calculated based on incoming edge weights rather than outgoing.) appears that my algo still finds shortest path but you need to manually calculate total score after. might go back and fix this
 #### Problem 2
 Algo worked great for the 500x500 grid. Made a function to automate extending the grid and slightly modified the algorithm to accomodate the new list data type used to represent the input.
+
+### Day 16
+#### Initial Thoughts
+Looks like a fun parsing puzzle.
+##### Mid-way update
+So far I'm enjoying this problem. It's quite interesting, and seems fairly straightforward. However, the dynamic sub-packet size is introducing a lot of complexity that I am trying to work through.
