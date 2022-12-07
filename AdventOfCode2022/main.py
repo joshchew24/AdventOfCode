@@ -16,7 +16,7 @@ def main():
     read_input = solution_module.read_input
     solve = solution_module.solve
     
-    input = read_input(f"day{day}/{mode}{problem}")
+    input = read_input(f"day{day}/{mode}")
     solve(input)
 
 if __name__ == "__main__":

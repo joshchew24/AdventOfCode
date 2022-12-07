@@ -14,7 +14,8 @@ def solve(input):
         else:
             elves.append(elf)
             elf = 0
-    print(max(elves))
+    print(sum(sorted(elves, reverse=True)[:3]))
+   
 
 
 def main():
