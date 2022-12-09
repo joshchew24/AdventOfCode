@@ -18,7 +18,7 @@ def solve(input):
             while c in prev_13:              # pop until list has no dupes of c
                 while prev_13[0] != c:
                     prev_13.pop(0)
-                else:                       # also pop the most recent dupe
+                else:                        # also pop the most recent dupe
                     prev_13.pop(0)
             if len(prev_13) == 13:
                 print(index)
