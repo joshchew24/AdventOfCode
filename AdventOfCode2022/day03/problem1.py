@@ -30,13 +30,6 @@ def solve(input):
                 pass
     print(sum)
 
-def get_score(comp):
-    sum = 0
-    for item in comp:
-        sum += items[item]
-    return sum
-
-
 def main():
     read_input()
     solve()
