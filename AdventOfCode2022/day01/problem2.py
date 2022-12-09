@@ -16,12 +16,8 @@ def solve(input):
             elf = 0
     print(sum(sorted(elves, reverse=True)[:3]))
    
-
-
 def main():
-    read_input()
-    solve()
-
+    solve(read_input(sys.argv[1]))
 
 if __name__ == "__main__":
     main()

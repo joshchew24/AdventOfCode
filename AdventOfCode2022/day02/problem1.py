@@ -29,8 +29,8 @@ def get_score(opp, you):
     return score_grid[choice_map[you]][choice_map[opp]]
 
 def main():
-    read_input()
-    solve()
+    solve(read_input(sys.argv[1]))
 
 if __name__ == "__main__":
+    main()_ == "__main__":
     main()

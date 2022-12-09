@@ -55,8 +55,7 @@ def solve(input):
     print(tops)
 
 def main():
-    read_input()
-    solve()
+    solve(read_input(sys.argv[1]))
 
 if __name__ == "__main__":
     main()
