@@ -3,8 +3,6 @@ import numpy as np
 
 def read_input(mode):
     with open(f"{mode}.txt") as input:
-        # test = list(map(lambda x: (int(x), False), input.readline().strip()))
-        # breakpoint()
         # (height, total score, n,e,s,w)
         trees = np.array(list(map(lambda x: (int(x), 1, 0,0,0,0), input.readline().strip())), dtype='i,i,i,i,i,i')
         for line in input:
@@ -13,57 +11,19 @@ def read_input(mode):
     return trees
 
 def solve(input):
-    # best = 0
-    # for y in range(0, input.shape[0]):
-    #     for x in range(0, input.shape[1]):
-    #         best = max(best, check_neighbours(input, (y,x)))
-    # print(best)
-    # print(check_neighbours(input, (0, 0))
-    # input = check_north(input)
-    # input = check_east(input)
-    input = check_south(input)
-    # input = check_west(input)
     print_input(check_west(check_south(check_east(check_north(input)))))
+    print(find_best_score(input))
 
 def print_input(input):
     for y in range(0, input.shape[0]):
         print([f"{input[y,x][0]}: {input[y,x][1]}" for x in range(0, input.shape[1])])
 
-### TODO: using neighbour scores doesn't work because it requires it to be calculated already
-### fucking dumbass messed up the induction
-def check_neighbours(input, curr):
-    breakpoint()
-    y,x = curr
-    score = 1
-    north = (y-1, x) if y > 0 else None
-    east = (y, x+1) if x < input.shape[1] - 1 else None
-    south = (y+1, x) if y < input.shape[0] - 1 else None
-    west = (y, x-1) if x > 0 else None
 
-    if north:
-        if input[north][0] < input[curr][0]:
-            score *= input[north][1]
-            input[curr][2] = input[north][2]
-        else:
-            input[curr][2] = input[north][0]
-    if east:
-        if input[east][0] < input[curr][0]:
-            score *= input[east][1]
-            input[curr][3] = input[east][3]
-        else:
-            input[curr][3] = input[east][0]
-    if south:
-        if input[south][0] < input[curr][0]:
-            score *= input[south][1]
-            input[curr][4] = input[south][4]
-        else:
-            input[curr][4] = input[south][0]
-    if west:
-        if input[west][0] < input[curr][0]:
-            score *= input[west][1]
-            input[curr][5] = input[west][5]
-        else:
-            input[curr][5] = input[west][0]
+def find_best_score(input):
+    score = 0
+    for row in input:
+        for tree in row:
+            score = max(score, tree[1])
     return score
 
 
@@ -176,7 +136,6 @@ def check_east(input):
             9:[],
         }
         for x in range(input.shape[1]-1, 0-1, -1):
-            # breakpoint()
             if x == input.shape[1]-1:
                 e_score = 0
             else:
