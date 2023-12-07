@@ -13,13 +13,13 @@ INPUT_TYPE = "input2"
 
 times = input_times[input_map[INPUT_TYPE]]
 distances = input_distances[input_map[INPUT_TYPE]]
-sum = 1
+product = 1
+
 for time, distance in zip(times, distances):
     left_zero = (time - sqrt(pow(time, 2) - 4 * distance))/2
     right_zero = (time + sqrt(pow(time, 2) - 4 * distance))/2
-
     shortest = int(left_zero + 1) if ceil(left_zero) == left_zero else ceil(left_zero)
-    longest = int(right_zero) if ceil(right_zero) == right_zero else ceil(right_zero)
-    sum *= longest - shortest
+    longest = int(ceil(right_zero))
+    product *= longest - shortest
 
-print(sum)
+print(product)
