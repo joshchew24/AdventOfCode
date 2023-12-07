@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 
 PUZZLE_INPUT = "input.txt"
@@ -10,8 +11,10 @@ def main():
     parser.add_argument('-t', '--test', action='store_true')
     if (parser.parse_args().test):
         in_file = EXAMPLE_INPUT
-    
-    with open(in_file) as input:
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, in_file)
+
+    with open(file_path) as input:
         lines = input.readlines()
 
 
