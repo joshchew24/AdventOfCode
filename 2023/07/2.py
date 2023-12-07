@@ -12,7 +12,7 @@ cards = {
     "A": 0,
     "K": 1,
     "Q": 2,
-    "J": 3,
+    # "J": 3,
     "T": 4,
     "9": 5,
     "8": 6,
@@ -22,7 +22,8 @@ cards = {
     "4": 10,
     "3": 11,
     "2": 12,
-    "1": 13
+    "1": 13,
+    "J": 14
 }
 
 hand_types = {
@@ -59,6 +60,12 @@ def rank_sort_key(hand: Tuple[str, str]):
 
 def get_hand_type(hand: str):
     card_counts = Counter(hand)
+
+    if "J" in hand:
+        wildcard_count = card_counts.pop("J")
+        if wildcard_count == 5: return hand_types["five"]
+        card_counts[card_counts.most_common(1)[0][0]] += wildcard_count
+    
     three = False
     two = 0
     for count in card_counts.values():
