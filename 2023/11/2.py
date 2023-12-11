@@ -33,25 +33,31 @@ def main():
     galaxies = list(zip(*np.where(rows == "#"))) if pretty else list(zip(*np.where(rows)))
     print(galaxies)
     comparator = "." if pretty else False
-    for empty_y, row in enumerate(rows):
+    empty_y = 0
+    for row in rows:
         if np.all(row == comparator):
             for i, galaxy in enumerate(galaxies):
                 galaxy_y, galaxy_x = galaxy
                 if galaxy_y > empty_y:
-                    galaxies[i] = (galaxy_y + EXPANSION_FACTOR, galaxy_x)
-    for empty_x, col in enumerate(rows.T):
+                    galaxies[i] = (galaxy_y + EXPANSION_FACTOR - 1, galaxy_x)
+            empty_y += EXPANSION_FACTOR - 1
+        else:
+            empty_y += 1
+    empty_x = 0
+    for col in rows.T:
         if np.all(col == comparator):
             for i, galaxy in enumerate(galaxies):
                 galaxy_y, galaxy_x = galaxy
-                if galaxy_y > empty_y:
-                    galaxies[i] = (galaxy_y, galaxy_x + EXPANSION_FACTOR)
+                if galaxy_x > empty_x:
+                    galaxies[i] = (galaxy_y, galaxy_x + EXPANSION_FACTOR - 1)
+            empty_x += EXPANSION_FACTOR - 1
+        else:
+            empty_x += 1
     print(galaxies)
     sum = 0
-    galaxies = np.array(galaxies, dtype=int)
     for i, start in enumerate(galaxies):
         for end in galaxies[i:]:
             val = (max(end[1], start[1]) - min(end[1], start[1])) + (max(end[0], start[0]) - min(end[0], start[0]))
-            # print(f"distance from {start} to {end} is {val}")
             sum += val
     print(sum)
 
