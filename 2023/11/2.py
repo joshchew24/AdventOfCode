@@ -13,10 +13,12 @@ def main():
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-f', '--file', help='specify an input file to test', default=PUZZLE_INPUT)
     group.add_argument('-t', '--test', dest='file', action='store_const', const=EXAMPLE_INPUT, help='test the instruction example')
-    parser.add_argument('-p', '--pretty', action='store_true')
+    parser.add_argument('-p', '--pretty', action='store_true', help='set this flag for easier debugging, arrays are prettier')
+    parser.add_argument('-e', '--expansion', default=EXPANSION_FACTOR, help='choose the expansion factor')
     args = parser.parse_args()
     in_file = args.file
     pretty = args.pretty
+    expansion_factor = int(args.expansion)
     script_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(script_dir, in_file)
 
@@ -31,7 +33,7 @@ def main():
 
     
     galaxies = list(zip(*np.where(rows == "#"))) if pretty else list(zip(*np.where(rows)))
-    print(galaxies)
+    
     comparator = "." if pretty else False
     empty_y = 0
     for row in rows:
@@ -39,8 +41,8 @@ def main():
             for i, galaxy in enumerate(galaxies):
                 galaxy_y, galaxy_x = galaxy
                 if galaxy_y > empty_y:
-                    galaxies[i] = (galaxy_y + EXPANSION_FACTOR - 1, galaxy_x)
-            empty_y += EXPANSION_FACTOR - 1
+                    galaxies[i] = (galaxy_y + expansion_factor - 1, galaxy_x)
+            empty_y += expansion_factor
         else:
             empty_y += 1
     empty_x = 0
@@ -49,11 +51,11 @@ def main():
             for i, galaxy in enumerate(galaxies):
                 galaxy_y, galaxy_x = galaxy
                 if galaxy_x > empty_x:
-                    galaxies[i] = (galaxy_y, galaxy_x + EXPANSION_FACTOR - 1)
-            empty_x += EXPANSION_FACTOR - 1
+                    galaxies[i] = (galaxy_y, galaxy_x + expansion_factor - 1)
+            empty_x += expansion_factor
         else:
             empty_x += 1
-    print(galaxies)
+            
     sum = 0
     for i, start in enumerate(galaxies):
         for end in galaxies[i:]:
