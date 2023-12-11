@@ -31,7 +31,7 @@ def main():
         num_rows_added = 0
         comparator = "." if pretty else False
         for i, row in enumerate(rows):
-            if np.all(row == comparator): # TODO: change to false for performance
+            if np.all(row == comparator):
                 expanded = np.insert(expanded, i + num_rows_added, row, axis=0)
                 num_rows_added += 1
         cols = expanded.T
@@ -40,25 +40,16 @@ def main():
             if np.all(col == comparator):
                 expanded = np.insert(expanded, i + num_cols_added, col, axis=1)
                 num_cols_added += 1
-        print(expanded)
         galaxies = list(zip(*np.where(expanded == "#"))) if pretty else list(zip(*np.where(expanded)))
-        print(galaxies)
+
         sum = 0
-
-
-        # galaxies = np.array(galaxies, dtype=int)
-        # distances = np.linalg.norm(galaxies[:, np.newaxis, :] - galaxies[np.newaxis, :, :], axis=-1)
-        # print(distances)
-        # for start in galaxies:
-        #     for end in galaxies:
-        #         if start == end:
-        #             continue
-        #         val = (max(end[1], start[1]) - min(end[1], start[1])) + (max(end[0], start[0]) - min(end[0], start[0]))
-        #         print(f"distance from {start} to {end} is {val}")
-        #         sum += val #abs(((end[1] - start[1]) + (end[0] - start[0])))
+        galaxies = np.array(galaxies, dtype=int)
+        for i, start in enumerate(galaxies):
+            for end in galaxies[i:]:
+                val = (max(end[1], start[1]) - min(end[1], start[1])) + (max(end[0], start[0]) - min(end[0], start[0]))
+                # print(f"distance from {start} to {end} is {val}")
+                sum += val
         print(sum)
-
-
 
 if __name__ == "__main__":
     main()
