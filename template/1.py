@@ -1,6 +1,5 @@
 import argparse
 import os
-import sys
 
 PUZZLE_INPUT = "input.txt"
 EXAMPLE_INPUT = "small.txt"
